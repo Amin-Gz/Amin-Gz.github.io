@@ -5,10 +5,9 @@ import {
   Sun,
   Moon,
   Laptop,
-  Command,
   Menu,
   X,
-  Sparkles,
+  Video,
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -17,7 +16,6 @@ interface NavigationProps {
   theme: ThemeMode;
   onSetTheme: (theme: ThemeMode) => void;
   onOpenCommandPalette: () => void;
-  onOpenDesignSpecs?: () => void;
 }
 
 export function Navigation({
@@ -26,7 +24,6 @@ export function Navigation({
   theme,
   onSetTheme,
   onOpenCommandPalette,
-  onOpenDesignSpecs,
 }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,10 +41,11 @@ export function Navigation({
     }
   }, []);
 
-  const navItems: { id: TabId; label: string }[] = [
+  const navItems: { id: TabId; label: string; badge?: string }[] = [
     { id: 'about', label: 'About' },
     { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
+    { id: 'videos', label: 'Videos', badge: 'Coming Soon' },
     { id: 'research', label: 'Research' },
     { id: 'stack', label: 'Stack' },
     { id: 'cv', label: 'CV' },
@@ -103,35 +101,25 @@ export function Navigation({
                   key={item.id}
                   id={`nav-tab-${item.id}`}
                   onClick={() => onSelectTab(item.id)}
-                  className={`relative px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-150 ${
+                  className={`relative px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-150 flex items-center gap-1.5 ${
                     isActive
                       ? 'text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 shadow-xs'
                       : 'text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
                   }`}
                 >
                   {item.label}
+                  {item.id === 'videos' && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+                  )}
                 </button>
               );
             })}
           </nav>
         </div>
 
-        {/* Right Actions: Quick Links, Command Palette, Theme, Contact */}
+        {/* Right Actions: Search, Theme, Contact */}
         <div className="flex items-center gap-2.5">
-          {/* Design System Inspector Trigger */}
-          {onOpenDesignSpecs && (
-            <button
-              id="nav-specs-btn"
-              onClick={onOpenDesignSpecs}
-              title="View Design System & Specifications"
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-lg shadow-xs transition-colors"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-blue-500" />
-              <span>Specs</span>
-            </button>
-          )}
-
-          {/* Command Palette Trigger (Bento style) */}
+          {/* Command Palette Trigger */}
           <button
             id="nav-command-btn"
             onClick={onOpenCommandPalette}
@@ -148,7 +136,7 @@ export function Navigation({
           <button
             id="nav-theme-toggle"
             onClick={cycleTheme}
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-xs transition-all"
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-xs transition-all cursor-pointer"
             title={`Current theme: ${theme} (Click to switch)`}
           >
             {getThemeIcon()}
@@ -181,7 +169,7 @@ export function Navigation({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-black/[0.08] dark:border-white/[0.1] bg-[#F5F5F7] dark:bg-[#121214] px-4 py-3 space-y-1 transition-all">
+        <div className="md:hidden border-b border-[#D2D2D7] dark:border-white/10 bg-[#F5F5F7] dark:bg-[#121214] px-4 py-3 space-y-1 transition-all">
           {navItems.map((item) => {
             const isActive = activeTab === item.id;
             return (
@@ -202,7 +190,7 @@ export function Navigation({
               </button>
             );
           })}
-          <div className="pt-2 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between px-2">
+          <div className="pt-2 border-t border-[#D2D2D7]/50 dark:border-white/10 flex items-center justify-between px-2">
             <span className="text-xs text-[#86868B]">Theme</span>
             <div className="flex gap-1">
               {(['light', 'dark', 'system'] as ThemeMode[]).map((m) => (

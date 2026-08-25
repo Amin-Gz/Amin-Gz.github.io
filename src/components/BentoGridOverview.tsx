@@ -319,10 +319,43 @@ export function BentoGridOverview({
 
       </div>
 
-      {/* Secondary Bento Row: Personality & Philosophy Ribbon */}
+      {/* Secondary Bento Row: Videos, Personality & Philosophy Ribbon */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 pt-1">
+        {/* Confidential Project Walkthroughs Card */}
+        <div
+          id="bento-videos-teaser-card"
+          onClick={() => onSelectTab('videos')}
+          className="md:col-span-4 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[24px] p-5 sm:p-6 flex flex-col justify-between shadow-sm hover:border-blue-500/40 cursor-pointer group transition-all"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+              <span className="text-[11px] font-mono uppercase tracking-wider text-[#86868B]">
+                Private Demos
+              </span>
+            </div>
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 font-semibold">
+              Coming Soon
+            </span>
+          </div>
+
+          <div className="my-3">
+            <h3 className="text-sm font-bold text-[#1D1D1F] dark:text-[#F5F5F7] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              Enterprise UI/UX Demos
+            </h3>
+            <p className="text-xs text-[#86868B] mt-0.5 line-clamp-2">
+              Recorded workflows & design architectures for proprietary company apps (Ariomex, Tonb, etc.) coming soon.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between text-xs font-medium text-blue-600 dark:text-blue-400 pt-2 border-t border-[#D2D2D7]/40 dark:border-white/5">
+            <span>Preview upcoming demos</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </div>
+
         {/* Personality & Sports Bento Box */}
-        <div className="md:col-span-7 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[24px] p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+        <div className="md:col-span-5 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[24px] p-5 sm:p-6 flex flex-col justify-between shadow-sm">
           <div className="space-y-1">
             <div className="text-[11px] font-mono uppercase tracking-wider text-[#86868B]">
               Off the keyboard
@@ -332,7 +365,7 @@ export function BentoGridOverview({
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 flex-shrink-0">
+          <div className="flex flex-wrap items-center gap-2 pt-3">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 text-xs rounded-full bg-[#F5F5F7] dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 text-[#6E6E73] dark:text-[#A1A1A6]">
               <Waves className="w-3 h-3 text-cyan-500" />
               <span>Wakeboarding</span>
@@ -349,18 +382,18 @@ export function BentoGridOverview({
         </div>
 
         {/* Quick Contact & Action Bento Box */}
-        <div className="md:col-span-5 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[24px] p-5 sm:p-6 flex items-center justify-between shadow-sm">
+        <div className="md:col-span-3 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[24px] p-5 sm:p-6 flex flex-col justify-between shadow-sm">
           <div className="space-y-0.5">
             <div className="text-xs font-bold text-[#1D1D1F] dark:text-[#F5F5F7]">
-              Have a project in mind?
+              Have a project?
             </div>
             <div className="text-xs text-[#86868B]">Let’s build something durable.</div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="pt-3">
             <a
               href={`mailto:${personalInfo.email}`}
-              className="px-4 py-2 rounded-full bg-[#1D1D1F] text-white dark:bg-[#F5F5F7] dark:text-black text-xs font-medium hover:bg-black dark:hover:bg-white transition-colors"
+              className="w-full text-center block px-4 py-2 rounded-full bg-[#1D1D1F] text-white dark:bg-[#F5F5F7] dark:text-black text-xs font-medium hover:bg-black dark:hover:bg-white transition-colors shadow-xs"
             >
               Get in touch
             </a>

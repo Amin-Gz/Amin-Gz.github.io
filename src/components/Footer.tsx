@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { personalInfo } from '../data/portfolioData';
-import { Sparkles, Heart } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
-interface FooterProps {
-  onOpenDesignSpecs?: () => void;
-}
-
-export function Footer({ onOpenDesignSpecs }: FooterProps) {
+export function Footer() {
   const [curiosityCount, setCuriosityCount] = useState(0);
   const [showEasterEgg, setShowEasterEgg] = useState(false);
 
@@ -55,14 +51,6 @@ export function Footer({ onOpenDesignSpecs }: FooterProps) {
 
         {/* Right Links */}
         <div className="flex items-center gap-4">
-          {onOpenDesignSpecs && (
-            <button
-              onClick={onOpenDesignSpecs}
-              className="hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] transition-colors cursor-pointer"
-            >
-              Design Tokens
-            </button>
-          )}
           <a
             href={personalInfo.github}
             target="_blank"

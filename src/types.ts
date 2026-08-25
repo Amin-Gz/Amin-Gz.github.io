@@ -1,6 +1,6 @@
 export type ThemeMode = 'light' | 'dark' | 'system';
 
-export type TabId = 'about' | 'experience' | 'projects' | 'research' | 'stack' | 'cv';
+export type TabId = 'about' | 'experience' | 'projects' | 'videos' | 'research' | 'stack' | 'cv';
 
 export interface ExperienceItem {
   id: string;
@@ -29,6 +29,31 @@ export interface ProjectItem {
   role: string;
   highlights: string[];
   metricsOrScope?: string;
+}
+
+export interface VideoWorkflowChapter {
+  timestamp: string;
+  title: string;
+  description: string;
+}
+
+export interface PrivateProjectVideo {
+  id: string;
+  title: string;
+  company: string;
+  role: string;
+  period: string;
+  ndaDisclaimer: string;
+  category: 'Enterprise SaaS' | 'Internal ERP' | 'FinTech & Trading' | 'Logistics & Dispatch' | 'Educational Systems';
+  tagline: string;
+  overview: string;
+  uxHighlights: string[];
+  technologies: string[];
+  metrics?: string;
+  duration?: string;
+  keyWorkflows: VideoWorkflowChapter[];
+  mockupType: 'trading' | 'dispatch' | 'canvas' | 'erp' | 'analytics';
+  videoPreviewBadge?: string;
 }
 
 export type PublicationTopic = 'All' | 'AI' | 'Optimization' | 'Information Systems' | 'E-Learning';

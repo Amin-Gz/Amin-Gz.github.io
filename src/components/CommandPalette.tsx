@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, ReactNode, KeyboardEvent } from 'react';
 import { TabId, ThemeMode } from '../types';
 import { personalInfo, projects, publications } from '../data/portfolioData';
+import { videoProjectsData } from '../data/videoProjectsData';
 import {
   Search,
   ArrowRight,
@@ -10,7 +11,7 @@ import {
   BookOpen,
   Cpu,
   FileText,
-  Mail,
+  Video,
   Linkedin,
   Github,
   Sun,
@@ -18,8 +19,6 @@ import {
   Laptop,
   Check,
   Copy,
-  ExternalLink,
-  Sparkles,
 } from 'lucide-react';
 
 interface CommandPaletteProps {
@@ -28,14 +27,13 @@ interface CommandPaletteProps {
   onSelectTab: (tab: TabId) => void;
   onSetTheme: (theme: ThemeMode) => void;
   onSelectProject?: (projectId: string) => void;
-  onOpenDesignSpecs?: () => void;
 }
 
 interface CommandItem {
   id: string;
   title: string;
   subtitle?: string;
-  category: 'Navigate' | 'Projects' | 'Research' | 'Connect' | 'Appearance' | 'Actions';
+  category: 'Navigate' | 'Projects' | 'Videos (Private UI/UX)' | 'Research' | 'Connect' | 'Appearance';
   icon: ReactNode;
   action: () => void;
   badge?: string;
@@ -47,7 +45,6 @@ export function CommandPalette({
   onSelectTab,
   onSetTheme,
   onSelectProject,
-  onOpenDesignSpecs,
 }: CommandPaletteProps) {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -108,6 +105,18 @@ export function CommandPalette({
       },
     },
     {
+      id: 'nav-videos',
+      title: 'Confidential Videos & UI/UX Demos',
+      subtitle: 'Proprietary enterprise dashboards & recorded flows (Coming Soon)',
+      category: 'Navigate',
+      icon: <Video className="w-4 h-4 text-blue-500" />,
+      action: () => {
+        onSelectTab('videos');
+        onClose();
+      },
+      badge: 'Coming Soon',
+    },
+    {
       id: 'nav-research',
       title: 'Research & Publications',
       subtitle: '6 conference papers in applied AI & optimization',
@@ -141,6 +150,20 @@ export function CommandPalette({
         onClose();
       },
     },
+
+    // Video Private UI/UX Demos
+    ...videoProjectsData.map((v) => ({
+      id: `vid-${v.id}`,
+      title: v.title,
+      subtitle: `${v.company} · ${v.category} · ${v.duration}`,
+      category: 'Videos (Private UI/UX)' as const,
+      icon: <Video className="w-4 h-4 text-blue-500" />,
+      action: () => {
+        onSelectTab('videos');
+        onClose();
+      },
+      badge: v.category,
+    })),
 
     // Selected Projects
     ...projects.map((proj) => ({
@@ -238,19 +261,6 @@ export function CommandPalette({
         onClose();
       },
     },
-
-    // Actions
-    {
-      id: 'action-specs',
-      title: 'View Design System Specifications',
-      subtitle: 'Inspect color tokens, typography scales, and Figma foundations',
-      category: 'Actions',
-      icon: <Sparkles className="w-4 h-4 text-blue-500" />,
-      action: () => {
-        if (onOpenDesignSpecs) onOpenDesignSpecs();
-        onClose();
-      },
-    },
   ];
 
   const filteredItems = allItems.filter((item) => {
@@ -288,11 +298,11 @@ export function CommandPalette({
     >
       <div
         id="command-palette-modal"
-        className="w-full max-w-xl bg-[#FFFFFF] dark:bg-[#1C1C1E] rounded-xl shadow-2xl border border-black/10 dark:border-white/10 overflow-hidden flex flex-col max-h-[75vh]"
+        className="w-full max-w-xl bg-[#FFFFFF] dark:bg-[#1C1C1E] rounded-2xl shadow-2xl border border-[#D2D2D7] dark:border-white/10 overflow-hidden flex flex-col max-h-[75vh]"
         onKeyDown={handleKeyDown}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-black/[0.08] dark:border-white/[0.08]">
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[#D2D2D7]/60 dark:border-white/10">
           <Search className="w-4 h-4 text-[#86868B]" />
           <input
             ref={inputRef}
@@ -302,7 +312,7 @@ export function CommandPalette({
               setQuery(e.target.value);
               setSelectedIndex(0);
             }}
-            placeholder="Type a command, project, paper, or search..."
+            placeholder="Type a command, video demo, project, paper, or search..."
             className="flex-1 bg-transparent text-sm text-[#1D1D1F] dark:text-[#F5F5F7] placeholder-[#86868B] focus:outline-none"
           />
           {query && (
@@ -333,14 +343,14 @@ export function CommandPalette({
                   id={`cmd-item-${item.id}`}
                   onClick={item.action}
                   onMouseEnter={() => setSelectedIndex(index)}
-                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left text-xs transition-colors ${
+                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left text-xs transition-colors ${
                     isSelected
                       ? 'bg-blue-500/10 dark:bg-blue-400/15 text-[#1D1D1F] dark:text-[#F5F5F7]'
                       : 'text-[#6E6E73] dark:text-[#A1A1A6] hover:bg-black/[0.03] dark:hover:bg-white/[0.04]'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0 pr-2">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-md bg-black/[0.04] dark:bg-white/[0.06] flex items-center justify-center">
+                    <div className="flex-shrink-0 w-6 h-6 rounded-lg bg-black/[0.04] dark:bg-white/[0.06] flex items-center justify-center">
                       {item.icon}
                     </div>
                     <div className="min-w-0">
@@ -374,7 +384,7 @@ export function CommandPalette({
         </div>
 
         {/* Footer shortcuts */}
-        <div className="px-4 py-2 bg-black/[0.02] dark:bg-white/[0.02] border-t border-black/[0.06] dark:border-white/[0.06] flex items-center justify-between text-[11px] text-[#86868B]">
+        <div className="px-4 py-2 bg-black/[0.02] dark:bg-white/[0.02] border-t border-[#D2D2D7]/50 dark:border-white/10 flex items-center justify-between text-[11px] text-[#86868B]">
           <div className="flex items-center gap-3">
             <span>
               <kbd className="font-mono bg-black/[0.04] dark:bg-white/[0.08] px-1 py-0.5 rounded">↑</kbd>{' '}

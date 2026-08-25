@@ -5,13 +5,13 @@ import { BentoGridOverview } from './components/BentoGridOverview';
 import { AboutSection } from './components/AboutSection';
 import { ExperienceSection } from './components/ExperienceSection';
 import { ProjectsSection } from './components/ProjectsSection';
+import { VideosSection } from './components/VideosSection';
 import { ResearchSection } from './components/ResearchSection';
 import { StackSection } from './components/StackSection';
 import { CVSection } from './components/CVSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { CommandPalette } from './components/CommandPalette';
-import { DesignTokensModal } from './components/DesignTokensModal';
 import { ProjectModal } from './components/ProjectModal';
 import { projects } from './data/portfolioData';
 
@@ -25,7 +25,6 @@ export default function App() {
     return 'system';
   });
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
-  const [designSpecsOpen, setDesignSpecsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
   // Apply Theme Mode (Light / Dark / System)
@@ -97,7 +96,6 @@ export default function App() {
         theme={theme}
         onSetTheme={setTheme}
         onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-        onOpenDesignSpecs={() => setDesignSpecsOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -135,6 +133,13 @@ export default function App() {
           </div>
         )}
 
+        {activeTab === 'videos' && (
+          <div className="animate-in fade-in duration-200 pt-6 space-y-12">
+            <VideosSection />
+            <ContactSection />
+          </div>
+        )}
+
         {activeTab === 'research' && (
           <div className="animate-in fade-in duration-200 pt-6 space-y-12">
             <ResearchSection />
@@ -158,7 +163,7 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer onOpenDesignSpecs={() => setDesignSpecsOpen(true)} />
+      <Footer />
 
       {/* Spotlight Command Palette (Cmd+K) */}
       <CommandPalette
@@ -167,19 +172,12 @@ export default function App() {
         onSelectTab={handleSelectTab}
         onSetTheme={setTheme}
         onSelectProject={handleSelectProject}
-        onOpenDesignSpecs={() => setDesignSpecsOpen(true)}
       />
 
       {/* Global Project Details Modal */}
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
-      />
-
-      {/* Figma Design System Foundations & Specifications Modal */}
-      <DesignTokensModal
-        isOpen={designSpecsOpen}
-        onClose={() => setDesignSpecsOpen(false)}
       />
     </div>
   );
