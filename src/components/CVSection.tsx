@@ -20,6 +20,13 @@ export function CVSection({ onSelectTab }: CVSectionProps) {
     window.print();
   };
 
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = new URL('../../assets/bilingual.pdf', import.meta.url).href;
+    link.download = 'Amin-Goodarzi-CV.pdf';
+    link.click();
+  };
+
   return (
     <section id="cv-section" className="py-12 max-w-4xl mx-auto space-y-10">
       {/* Top Header & Actions */}
@@ -45,7 +52,7 @@ export function CVSection({ onSelectTab }: CVSectionProps) {
 
           <button
             id="cv-download-btn"
-            onClick={handlePrint}
+            onClick={handleDownload}
             className="inline-flex items-center gap-1.5 px-5 py-2 text-xs font-medium rounded-full text-white dark:text-black bg-[#1D1D1F] dark:bg-[#F5F5F7] hover:bg-black dark:hover:bg-white transition-all shadow-xs"
           >
             <Download className="w-3.5 h-3.5" />

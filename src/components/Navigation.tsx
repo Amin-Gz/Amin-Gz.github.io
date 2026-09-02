@@ -90,7 +90,7 @@ export function Navigation({
           </button>
 
           {/* Desktop Navigation Tabs */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => {
               const isActive = activeTab === item.id;
               return (
@@ -156,7 +156,7 @@ export function Navigation({
           <button
             id="nav-mobile-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden w-8 h-8 rounded-md flex items-center justify-center text-[#1D1D1F] dark:text-[#F5F5F7] bg-black/4 dark:bg-white/6"
+            className="lg:hidden w-8 h-8 rounded-md flex items-center justify-center text-[#1D1D1F] dark:text-[#F5F5F7] bg-black/4 dark:bg-white/6"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -166,7 +166,7 @@ export function Navigation({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-[#D2D2D7] dark:border-white/10 bg-[#F5F5F7] dark:bg-[#121214] px-4 py-3 space-y-1 transition-all">
+        <div className="lg:hidden border-b border-[#D2D2D7] dark:border-white/10 bg-[#F5F5F7] dark:bg-[#121214] px-4 py-3 space-y-1 transition-all">
           {navItems.map((item) => {
             const isActive = activeTab === item.id;
             return (

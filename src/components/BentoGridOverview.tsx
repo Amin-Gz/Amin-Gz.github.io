@@ -304,7 +304,7 @@ export function BentoGridOverview({
               Genetic Algorithms in Logistics
             </div>
             <div className="text-[10px] text-[#86868B] font-mono mt-0.5 flex justify-between items-center">
-              <span>CIVILICA: MEMARCONF05_278</span>
+              <span>CIVILICA: 2446247</span>
               <span className="text-blue-600 dark:text-blue-400">→</span>
             </div>
           </div>
