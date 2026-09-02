@@ -6,7 +6,6 @@ import {
   MapPin,
   ExternalLink,
   CheckCircle2,
-  ChevronRight,
 } from 'lucide-react';
 
 export function ExperienceSection() {
@@ -25,7 +24,7 @@ export function ExperienceSection() {
       </div>
 
       {/* Timeline Container */}
-      <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-[11px] sm:before:left-[15px] before:top-3 before:bottom-3 before:w-[2px] before:bg-black/[0.08] dark:before:bg-white/[0.08]">
+      <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-2.75 sm:before:left-3.75 before:top-3 before:bottom-3 before:w-0.5 before:bg-black/8 dark:before:bg-white/8">
         {experiences.map((exp) => {
           const isHovered = hoveredId === exp.id;
           const isAnyHovered = hoveredId !== null;
@@ -47,7 +46,7 @@ export function ExperienceSection() {
                 className={`absolute -left-6 sm:-left-8 top-1.5 w-6 h-6 sm:w-8 sm:h-8 rounded-full border flex items-center justify-center transition-colors duration-200 ${
                   exp.isCurrent || isHovered
                     ? 'bg-[#1D1D1F] dark:bg-[#F5F5F7] border-transparent text-white dark:text-black shadow-sm'
-                    : 'bg-[#F5F5F7] dark:bg-[#1C1C1E] border-black/[0.12] dark:border-white/[0.12] text-[#86868B]'
+                    : 'bg-[#F5F5F7] dark:bg-[#1C1C1E] border-black/12 dark:border-white/12 text-[#86868B]'
                 }`}
               >
                 <Briefcase className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
@@ -55,7 +54,7 @@ export function ExperienceSection() {
 
               {/* Card Container */}
               <div
-                className={`p-6 sm:p-8 rounded-[24px] sm:rounded-[28px] border transition-all duration-200 ${
+                className={`p-6 sm:p-8 rounded-3xl sm:rounded-[28px] border transition-all duration-200 ${
                   isHovered
                     ? 'bg-[#FFFFFF] dark:bg-[#1C1C1E] border-blue-500/40 dark:border-blue-400/40 shadow-md'
                     : 'bg-[#FFFFFF] dark:bg-[#1C1C1E] border-[#D2D2D7] dark:border-white/10 shadow-sm'
@@ -84,7 +83,7 @@ export function ExperienceSection() {
                     )}
                   </div>
 
-                  <div className="flex items-center gap-3 text-xs font-mono text-[#86868B] flex-shrink-0">
+                  <div className="flex items-center gap-3 text-xs font-mono text-[#86868B] shrink-0">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       <span>{exp.period}</span>
@@ -106,7 +105,7 @@ export function ExperienceSection() {
                 <ul className="space-y-2 mb-5">
                   {exp.highlights.map((h, i) => (
                     <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#1D1D1F] dark:text-[#F5F5F7]">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 mt-0.5 flex-shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 mt-0.5 shrink-0" />
                       <span className="leading-snug">{h}</span>
                     </li>
                   ))}

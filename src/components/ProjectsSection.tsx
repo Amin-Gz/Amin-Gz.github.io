@@ -3,15 +3,9 @@ import { ProjectItem } from '../types';
 import { projects } from '../data/portfolioData';
 import { ProjectModal } from './ProjectModal';
 import {
-  ExternalLink,
   Github,
   ArrowUpRight,
-  Sparkles,
-  Layers,
-  Code2,
-  Server,
   Globe,
-  CheckCircle2,
 } from 'lucide-react';
 
 export function ProjectsSection() {
@@ -25,7 +19,7 @@ export function ProjectsSection() {
   });
 
   const featured = projects.find((p) => p.id === 'avazeh-school') || projects[0];
-  const dayKimya = projects.find((p) => p.id === 'day-kimya');
+  const davkimya = projects.find((p) => p.id === 'dav-kimya');
   const ariomex = projects.find((p) => p.id === 'ariomex-platform');
   const divar = projects.find((p) => p.id === 'divar-sample');
   const cosmetics = projects.find((p) => p.id === 'cosmetics-store');
@@ -70,7 +64,7 @@ export function ProjectsSection() {
             <div
               id={`project-card-${featured.id}`}
               onClick={() => setSelectedProject(featured)}
-              className="group cursor-pointer rounded-[28px] sm:rounded-[32px] bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 p-6 sm:p-10 shadow-sm hover:shadow-md transition-all duration-300"
+              className="group cursor-pointer rounded-[28px] sm:rounded-4xl bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 p-6 sm:p-10 shadow-sm hover:shadow-md transition-all duration-300"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-7 space-y-4">
@@ -113,7 +107,7 @@ export function ProjectsSection() {
 
                 {/* Abstract Visual / UI Preview */}
                 <div className="lg:col-span-5 flex justify-center">
-                  <div className="w-full aspect-[4/3] rounded-2xl bg-[#F5F5F7] dark:bg-[#121214] border border-[#D2D2D7] dark:border-white/10 p-5 flex flex-col justify-between overflow-hidden group-hover:border-blue-500/30 transition-colors">
+                  <div className="w-full aspect-4/3 rounded-2xl bg-[#F5F5F7] dark:bg-[#121214] border border-[#D2D2D7] dark:border-white/10 p-5 flex flex-col justify-between overflow-hidden group-hover:border-blue-500/30 transition-colors">
                     <div className="flex items-center justify-between pb-3 border-b border-[#D2D2D7]/50 dark:border-white/10">
                       <div className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-full bg-red-400/80"></span>
@@ -124,7 +118,7 @@ export function ProjectsSection() {
                     </div>
                     <div className="space-y-2 py-4">
                       <div className="h-4 w-3/4 bg-blue-500/15 dark:bg-blue-400/20 rounded"></div>
-                      <div className="h-3 w-1/2 bg-black/[0.06] dark:bg-white/[0.08] rounded"></div>
+                      <div className="h-3 w-1/2 bg-black/6 dark:bg-white/8 rounded"></div>
                       <div className="grid grid-cols-3 gap-2 pt-2">
                         <div className="h-10 bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7]/50 dark:border-white/10 rounded-md"></div>
                         <div className="h-10 bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7]/50 dark:border-white/10 rounded-md"></div>
@@ -141,30 +135,30 @@ export function ProjectsSection() {
             </div>
           )}
 
-          {/* 2. Two Half-Width Projects: Day Kimya & Ariomex */}
+          {/* 2. Two Half-Width Projects: Dav Kimya & Ariomex */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {dayKimya && (
+            {davkimya && (
               <div
-                id={`project-card-${dayKimya.id}`}
-                onClick={() => setSelectedProject(dayKimya)}
+                id={`project-card-${davkimya.id}`}
+                onClick={() => setSelectedProject(davkimya)}
                 className="group cursor-pointer rounded-[28px] bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 p-6 sm:p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono text-[#86868B]">{dayKimya.category}</span>
+                    <span className="text-xs font-mono text-[#86868B]">{davkimya.category}</span>
                     <ArrowUpRight className="w-4 h-4 text-[#86868B] group-hover:text-blue-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                   <h3 className="text-xl font-bold text-[#1D1D1F] dark:text-[#F5F5F7] tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {dayKimya.title}
+                    {davkimya.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-[#6E6E73] dark:text-[#A1A1A6] leading-relaxed">
-                    {dayKimya.description}
+                    {davkimya.description}
                   </p>
                 </div>
 
                 <div className="space-y-3 pt-2">
                   <div className="flex flex-wrap gap-1.5">
-                    {dayKimya.technologies.slice(0, 4).map((t) => (
+                    {davkimya.technologies.slice(0, 4).map((t) => (
                       <span
                         key={t}
                         className="px-2.5 py-1 rounded-md text-[11px] font-mono text-[#6E6E73] dark:text-[#A1A1A6] bg-[#F5F5F7] dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10"
@@ -175,7 +169,7 @@ export function ProjectsSection() {
                   </div>
                   <div className="text-xs text-[#86868B] font-mono flex items-center gap-1">
                     <Globe className="w-3 h-3" />
-                    <span>daykimya.com</span>
+                    <span>davkimya.com</span>
                   </div>
                 </div>
               </div>
@@ -269,7 +263,7 @@ export function ProjectsSection() {
             <div
               key={proj.id}
               onClick={() => setSelectedProject(proj)}
-              className="group cursor-pointer rounded-[22px] bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-black/[0.08] dark:border-white/[0.08] p-6 shadow-[0_1px_8px_rgba(0,0,0,0.01)] hover:border-blue-500/30 dark:hover:border-blue-400/30 transition-all duration-200 flex flex-col justify-between space-y-4"
+              className="group cursor-pointer rounded-[22px] bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-black/8 dark:border-white/8 p-6 shadow-[0_1px_8px_rgba(0,0,0,0.01)] hover:border-blue-500/30 dark:hover:border-blue-400/30 transition-all duration-200 flex flex-col justify-between space-y-4"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -289,7 +283,7 @@ export function ProjectsSection() {
                   {proj.technologies.map((t) => (
                     <span
                       key={t}
-                      className="px-2 py-0.5 rounded text-[11px] font-mono text-[#6E6E73] dark:text-[#A1A1A6] bg-black/[0.03] dark:bg-white/[0.04]"
+                      className="px-2 py-0.5 rounded text-[11px] font-mono text-[#6E6E73] dark:text-[#A1A1A6] bg-black/3 dark:bg-white/4"
                     >
                       {t}
                     </span>

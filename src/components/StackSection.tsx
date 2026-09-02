@@ -8,12 +8,10 @@ import {
   Database,
   Wrench,
   Search,
-  Check,
 } from 'lucide-react';
 
 export function StackSection() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTech, setSelectedTech] = useState<TechItem | null>(null);
 
   const categories: {
     id: TechItem['category'];
@@ -104,7 +102,7 @@ export function StackSection() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-black/[0.04] dark:bg-white/[0.06] flex items-center justify-center">
+                  <div className="w-7 h-7 rounded-lg bg-black/4 dark:bg-white/6 flex items-center justify-center">
                     {cat.icon}
                   </div>
                   <div>
@@ -127,8 +125,7 @@ export function StackSection() {
                   <div
                     key={tech.name}
                     id={`tech-${tech.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
-                    onClick={() => setSelectedTech(tech)}
-                    className="group cursor-pointer p-3 rounded-xl bg-[#F5F5F7] dark:bg-[#2C2C2E]/60 border border-[#D2D2D7] dark:border-white/10 hover:border-blue-500/40 dark:hover:border-blue-400/40 hover:bg-white dark:hover:bg-[#2C2C2E] transition-all duration-200 flex flex-col justify-between space-y-1.5"
+                    className="group p-3 rounded-xl bg-[#F5F5F7] dark:bg-[#2C2C2E]/60 border border-[#D2D2D7] dark:border-white/10 hover:border-blue-500/40 dark:hover:border-blue-400/40 hover:bg-white dark:hover:bg-[#2C2C2E] transition-all duration-200 flex flex-col justify-between space-y-1.5"
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-semibold text-[#1D1D1F] dark:text-[#F5F5F7] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">

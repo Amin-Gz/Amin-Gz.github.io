@@ -4,10 +4,6 @@ import {
   ExternalLink,
   Github,
   CheckCircle2,
-  Layers,
-  Terminal,
-  Code2,
-  ArrowRight,
 } from 'lucide-react';
 
 interface ProjectModalProps {
@@ -31,7 +27,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         className="w-full max-w-2xl bg-[#FFFFFF] dark:bg-[#1C1C1E] rounded-2xl shadow-2xl border border-black/10 dark:border-white/10 overflow-hidden flex flex-col max-h-[85vh] animate-in zoom-in-95 duration-150"
       >
         {/* Header Bar */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-black/[0.08] dark:border-white/[0.08]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-black/8 dark:border-white/8">
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-medium bg-blue-500/10 text-blue-600 dark:text-blue-400">
               {project.category}
@@ -42,7 +38,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-lg flex items-center justify-center text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] hover:bg-black/[0.05] dark:hover:bg-white/[0.08] transition-colors"
+            className="w-8 h-8 rounded-lg flex items-center justify-center text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] hover:bg-black/5 dark:hover:bg-white/8 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -72,9 +68,9 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               {project.highlights.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-2.5 p-3 rounded-xl bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.04] dark:border-white/[0.04]"
+                  className="flex items-start gap-2.5 p-3 rounded-xl bg-black/2 dark:bg-white/3 border border-black/4 dark:border-white/4"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
                   <span className="text-xs sm:text-sm text-[#1D1D1F] dark:text-[#F5F5F7] leading-normal">
                     {item}
                   </span>
@@ -92,7 +88,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               {project.technologies.map((t) => (
                 <span
                   key={t}
-                  className="px-3 py-1.5 rounded-lg text-xs font-mono bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.06] dark:border-white/[0.06] text-[#1D1D1F] dark:text-[#F5F5F7]"
+                  className="px-3 py-1.5 rounded-lg text-xs font-mono bg-black/4 dark:bg-white/6 border border-black/6 dark:border-white/6 text-[#1D1D1F] dark:text-[#F5F5F7]"
                 >
                   {t}
                 </span>
@@ -102,7 +98,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         </div>
 
         {/* Footer Actions */}
-        <div className="p-4 sm:p-6 bg-black/[0.02] dark:bg-white/[0.02] border-t border-black/[0.08] dark:border-white/[0.08] flex items-center justify-between gap-3">
+        <div className="p-4 sm:p-6 bg-black/2 dark:bg-white/2 border-t border-black/8 dark:border-white/8 flex items-center justify-between gap-3">
           <span className="text-xs text-[#86868B]">Role: {project.role}</span>
           <div className="flex items-center gap-3">
             {project.githubUrl && (
@@ -110,7 +106,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-medium text-[#1D1D1F] dark:text-[#F5F5F7] bg-black/[0.05] dark:bg-white/[0.08] hover:bg-black/[0.1] dark:hover:bg-white/[0.12] transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-medium text-[#1D1D1F] dark:text-[#F5F5F7] bg-black/5 dark:bg-white/8 hover:bg-black/10 dark:hover:bg-white/12 transition-colors"
               >
                 <Github className="w-3.5 h-3.5" />
                 <span>View Repository</span>

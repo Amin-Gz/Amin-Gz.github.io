@@ -1,14 +1,10 @@
 import { useState } from 'react';
-import { PublicationItem, PublicationTopic } from '../types';
+import { PublicationTopic } from '../types';
 import { publications, personalInfo } from '../data/portfolioData';
 import {
-  BookOpen,
   ExternalLink,
   Copy,
   Check,
-  Filter,
-  FileText,
-  Sparkles,
   ChevronDown,
   ChevronUp,
 } from 'lucide-react';
@@ -95,12 +91,12 @@ export function ResearchSection() {
             <div
               key={pub.id}
               id={`publication-${pub.civilicaId}`}
-              className="p-6 sm:p-7 rounded-[24px] bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-sm hover:shadow-md transition-all space-y-4"
+              className="p-6 sm:p-7 rounded-3xl bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-sm hover:shadow-md transition-all space-y-4"
             >
               {/* Header & Meta */}
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <span className="w-7 h-7 rounded-lg bg-black/[0.04] dark:bg-white/[0.06] text-[#86868B] font-mono text-xs flex items-center justify-center font-bold">
+                  <span className="w-7 h-7 rounded-lg bg-black/4 dark:bg-white/6 text-[#86868B] font-mono text-xs flex items-center justify-center font-bold">
                     {pub.indexNumber}
                   </span>
                   <span className="px-2 py-0.5 rounded text-[11px] font-mono text-blue-600 dark:text-blue-400 bg-blue-500/10">
@@ -111,7 +107,7 @@ export function ResearchSection() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleCopyCivilica(pub.civilicaId)}
-                    className="inline-flex items-center gap-1 px-2 py-1 text-[11px] font-mono rounded bg-black/[0.03] dark:bg-white/[0.05] hover:bg-black/[0.06] dark:hover:bg-white/[0.08] text-[#86868B] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] transition-colors"
+                    className="inline-flex items-center gap-1 px-2 py-1 text-[11px] font-mono rounded bg-black/3 dark:bg-white/5 hover:bg-black/6 dark:hover:bg-white/8 text-[#86868B] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] transition-colors"
                     title="Copy CIVILICA ID"
                   >
                     {isCopied ? (
@@ -150,14 +146,14 @@ export function ResearchSection() {
 
               {/* Expanded Key Contributions */}
               {isExpanded && (
-                <div className="pt-3 border-t border-black/[0.06] dark:border-white/[0.06] space-y-2 animate-in fade-in duration-150">
+                <div className="pt-3 border-t border-black/6 dark:border-white/6 space-y-2 animate-in fade-in duration-150">
                   <div className="text-[11px] font-mono uppercase tracking-wider text-[#86868B]">
                     Key Research Contributions
                   </div>
                   <ul className="space-y-1.5">
                     {pub.keyContributions.map((kc, i) => (
                       <li key={i} className="text-xs text-[#1D1D1F] dark:text-[#F5F5F7] flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 flex-shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
                         <span>{kc}</span>
                       </li>
                     ))}
@@ -166,12 +162,12 @@ export function ResearchSection() {
               )}
 
               {/* Footer: Topics & Expand toggle */}
-              <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs border-t border-black/[0.04] dark:border-white/[0.04]">
+              <div className="pt-2 flex flex-wrap items-center justify-between gap-3 text-xs border-t border-black/4 dark:border-white/4">
                 <div className="flex flex-wrap gap-1.5">
                   {pub.topics.map((t) => (
                     <span
                       key={t}
-                      className="px-2 py-0.5 rounded text-[11px] font-mono text-[#6E6E73] dark:text-[#A1A1A6] bg-black/[0.03] dark:bg-white/[0.04]"
+                      className="px-2 py-0.5 rounded text-[11px] font-mono text-[#6E6E73] dark:text-[#A1A1A6] bg-black/3 dark:bg-white/4"
                     >
                       {t}
                     </span>

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { TabId } from '../types';
 import {
   personalInfo,
@@ -10,17 +9,6 @@ import {
 import {
   Download,
   Printer,
-  FileText,
-  ExternalLink,
-  GraduationCap,
-  Briefcase,
-  Globe2,
-  Award,
-  BookOpen,
-  Mail,
-  Linkedin,
-  Github,
-  CheckCircle2,
 } from 'lucide-react';
 
 interface CVSectionProps {
@@ -49,7 +37,7 @@ export function CVSection({ onSelectTab }: CVSectionProps) {
           <button
             id="cv-print-btn"
             onClick={handlePrint}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-full text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] shadow-xs transition-all"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium rounded-full text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 hover:bg-black/4 dark:hover:bg-white/6 shadow-xs transition-all"
           >
             <Printer className="w-3.5 h-3.5" />
             <span>Print / Save PDF</span>
@@ -67,7 +55,7 @@ export function CVSection({ onSelectTab }: CVSectionProps) {
       </div>
 
       {/* Main CV Document Sheet */}
-      <div className="print-page p-8 sm:p-12 rounded-[28px] sm:rounded-[32px] bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-sm space-y-10">
+      <div className="print-page p-8 sm:p-12 rounded-[28px] sm:rounded-4xl bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-sm space-y-10">
         {/* CV Header */}
         <div className="space-y-4 pb-8 border-b border-[#D2D2D7]/50 dark:border-white/10">
           <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
@@ -207,7 +195,7 @@ export function CVSection({ onSelectTab }: CVSectionProps) {
         </div>
 
         {/* Languages & Selected Skills Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4 border-t border-black/[0.06] dark:border-white/[0.06]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-4 border-t border-black/6 dark:border-white/6">
           {/* Languages */}
           <div className="space-y-3">
             <h3 className="text-xs font-mono uppercase tracking-widest text-[#86868B]">

@@ -1,21 +1,14 @@
-import { useState } from 'react';
 import { personalInfo } from '../data/portfolioData';
 import {
-  Compass,
   Code,
   Server,
-  Layers,
-  Sparkles,
   Award,
   Waves,
   Mountain,
   Dumbbell,
-  Plane,
 } from 'lucide-react';
 
 export function AboutSection() {
-  const [activeTab, setActiveTab] = useState<'overview' | 'engineering' | 'sports'>('overview');
-
   return (
     <section id="about-section" className="py-12 max-w-4xl mx-auto space-y-12">
       {/* Section Header */}
@@ -29,7 +22,7 @@ export function AboutSection() {
       </div>
 
       {/* Main Narrative Card */}
-      <div className="p-6 sm:p-10 rounded-[28px] sm:rounded-[32px] bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-sm space-y-6">
+      <div className="p-6 sm:p-10 rounded-[28px] sm:rounded-4xl bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-sm space-y-6">
         <div className="prose prose-neutral dark:prose-invert max-w-none text-[#1D1D1F] dark:text-[#F5F5F7] text-base leading-relaxed space-y-4">
           <p>
             I am a frontend-focused software developer with professional experience in modern web architecture and an intentional progression into full-stack engineering. My work centers on creating performant, resilient, and visually deliberate digital interfaces that respect both user attention and backend constraints.
@@ -83,7 +76,7 @@ export function AboutSection() {
       </div>
 
       {/* Small Personality Moment (As specified in prompt: Section 8) */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-5 sm:p-6 rounded-2xl bg-black/3 dark:bg-white/4 border border-black/6 dark:border-white/6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="text-xs font-mono text-[#86868B] uppercase tracking-wider">
             Off the keyboard
@@ -95,15 +88,15 @@ export function AboutSection() {
 
         {/* Subtle sports micro-badges */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-white dark:bg-[#2C2C2E] border border-black/[0.06] dark:border-white/[0.08] text-[#6E6E73] dark:text-[#A1A1A6]">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-white dark:bg-[#2C2C2E] border border-black/6 dark:border-white/8 text-[#6E6E73] dark:text-[#A1A1A6]">
             <Waves className="w-3 h-3 text-cyan-500" />
             <span>Wakeboard</span>
           </span>
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-white dark:bg-[#2C2C2E] border border-black/[0.06] dark:border-white/[0.08] text-[#6E6E73] dark:text-[#A1A1A6]">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-white dark:bg-[#2C2C2E] border border-black/6 dark:border-white/8 text-[#6E6E73] dark:text-[#A1A1A6]">
             <Mountain className="w-3 h-3 text-blue-500" />
             <span>Snowboard</span>
           </span>
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-white dark:bg-[#2C2C2E] border border-black/[0.06] dark:border-white/[0.08] text-[#6E6E73] dark:text-[#A1A1A6]">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs rounded-full bg-white dark:bg-[#2C2C2E] border border-black/6 dark:border-white/8 text-[#6E6E73] dark:text-[#A1A1A6]">
             <Dumbbell className="w-3 h-3 text-emerald-500" />
             <span>Fitness</span>
           </span>

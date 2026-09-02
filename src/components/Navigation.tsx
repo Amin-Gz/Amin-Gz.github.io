@@ -7,7 +7,6 @@ import {
   Laptop,
   Menu,
   X,
-  Video,
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -30,15 +29,13 @@ export function Navigation({
   const [isMac, setIsMac] = useState(true);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setIsMac(/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform || navigator.userAgent));
-      
-      const handleScroll = () => {
-        setIsScrolled(window.scrollY > 20);
-      };
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
+    setIsMac(/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform || navigator.userAgent));
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems: { id: TabId; label: string; badge?: string }[] = [
@@ -104,7 +101,7 @@ export function Navigation({
                   className={`relative px-3.5 py-1.5 rounded-full text-sm font-medium transition-all duration-150 flex items-center gap-1.5 ${
                     isActive
                       ? 'text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 shadow-xs'
-                      : 'text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
+                      : 'text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] hover:bg-black/4 dark:hover:bg-white/6'
                   }`}
                 >
                   {item.label}
@@ -159,7 +156,7 @@ export function Navigation({
           <button
             id="nav-mobile-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden w-8 h-8 rounded-md flex items-center justify-center text-[#1D1D1F] dark:text-[#F5F5F7] bg-black/[0.04] dark:bg-white/[0.06]"
+            className="md:hidden w-8 h-8 rounded-md flex items-center justify-center text-[#1D1D1F] dark:text-[#F5F5F7] bg-black/4 dark:bg-white/6"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -200,7 +197,7 @@ export function Navigation({
                   className={`px-2.5 py-1 text-xs rounded capitalize ${
                     theme === m
                       ? 'bg-blue-600 text-white font-medium'
-                      : 'text-[#6E6E73] dark:text-[#A1A1A6] bg-black/[0.04] dark:bg-white/[0.06]'
+                      : 'text-[#6E6E73] dark:text-[#A1A1A6] bg-black/4 dark:bg-white/6'
                   }`}
                 >
                   {m}

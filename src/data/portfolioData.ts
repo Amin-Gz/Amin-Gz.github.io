@@ -99,8 +99,8 @@ export const projects: ProjectItem[] = [
     metricsOrScope: 'Live Production Platform',
   },
   {
-    id: 'day-kimya',
-    title: 'Day Kimya',
+    id: 'dav-kimya',
+    title: 'Dav Kimya',
     tagline: 'Industrial Company Website & Catalog',
     category: 'Frontend',
     featured: false,
@@ -108,7 +108,7 @@ export const projects: ProjectItem[] = [
       'Official corporate presence and product catalog for chemical manufacturing and distribution.',
     longDescription:
       'Engineered an editorial corporate website showcasing chemical products, industrial specifications, and technical inquiry forms with smooth, brand-aligned visual hierarchy.',
-    liveUrl: 'https://daykimya.com',
+    liveUrl: 'https://davkimya.com',
     role: 'Frontend Developer',
     technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'SEO Optimization'],
     highlights: [

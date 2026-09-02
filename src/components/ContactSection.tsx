@@ -8,7 +8,6 @@ import {
   Check,
   ArrowUpRight,
   MessageSquare,
-  Sparkles,
 } from 'lucide-react';
 
 export function ContactSection() {
@@ -22,7 +21,7 @@ export function ContactSection() {
 
   return (
     <section id="contact-section" className="py-12 max-w-4xl mx-auto space-y-8">
-      <div className="p-8 sm:p-12 rounded-[28px] sm:rounded-[32px] bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-sm space-y-8">
+      <div className="p-8 sm:p-12 rounded-[28px] sm:rounded-4xl bg-[#FFFFFF] dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-sm space-y-8">
         <div className="space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono text-blue-600 dark:text-blue-400 bg-blue-500/10">
             <MessageSquare className="w-3 h-3" />
@@ -52,7 +51,7 @@ export function ContactSection() {
           <button
             id="contact-copy-email-btn"
             onClick={handleCopyEmail}
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-all"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-sm font-medium text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 hover:bg-black/4 dark:hover:bg-white/6 transition-all"
           >
             {copied ? (
               <>
@@ -72,7 +71,7 @@ export function ContactSection() {
             href={personalInfo.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full text-sm font-medium text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-all"
+            className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full text-sm font-medium text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 hover:bg-black/4 dark:hover:bg-white/6 transition-all"
           >
             <Linkedin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span>LinkedIn</span>
@@ -84,7 +83,7 @@ export function ContactSection() {
             href={personalInfo.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full text-sm font-medium text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-all"
+            className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full text-sm font-medium text-[#1D1D1F] dark:text-[#F5F5F7] bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 hover:bg-black/4 dark:hover:bg-white/6 transition-all"
           >
             <Github className="w-4 h-4 text-[#1D1D1F] dark:text-[#F5F5F7]" />
             <span>GitHub</span>

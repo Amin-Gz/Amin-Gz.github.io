@@ -1,24 +1,15 @@
 import { useState } from 'react';
 import { TabId } from '../types';
-import { personalInfo, projects, publications, experiences } from '../data/portfolioData';
+import { personalInfo, projects, experiences } from '../data/portfolioData';
 import {
   ArrowRight,
   ArrowUpRight,
-  Sparkles,
-  Briefcase,
-  Layers,
   BookOpen,
-  Code2,
-  Terminal,
-  ExternalLink,
-  ChevronRight,
   Check,
-  Copy,
   Mail,
   Waves,
   Mountain,
   Dumbbell,
-  FileText,
 } from 'lucide-react';
 
 interface BentoGridOverviewProps {
@@ -45,6 +36,8 @@ export function BentoGridOverview({
   const handleOpenFeatured = () => {
     if (onOpenProjectModal && featuredProject) {
       onOpenProjectModal(featuredProject);
+    } else if (onSelectProject && featuredProject) {
+      onSelectProject(featuredProject.id);
     } else {
       onSelectTab('projects');
     }
@@ -58,7 +51,7 @@ export function BentoGridOverview({
         {/* 1. Hero Bento Card (Spans 8 cols on desktop) */}
         <div
           id="bento-hero-card"
-          className="md:col-span-8 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[28px] sm:rounded-[32px] p-6 sm:p-10 flex flex-col justify-between relative overflow-hidden group shadow-sm hover:shadow-md transition-all duration-300"
+          className="md:col-span-8 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[28px] sm:rounded-4xl p-6 sm:p-10 flex flex-col justify-between relative overflow-hidden group shadow-sm hover:shadow-md transition-all duration-300"
         >
           {/* Subtle Background Geometric Architectural Watermark */}
           <div className="absolute top-0 right-0 p-8 text-[#1D1D1F] dark:text-white opacity-[0.04] dark:opacity-[0.06] group-hover:opacity-[0.08] dark:group-hover:opacity-[0.12] transition-opacity pointer-events-none">
@@ -106,7 +99,7 @@ export function BentoGridOverview({
             <button
               id="bento-about-me-btn"
               onClick={() => onSelectTab('cv')}
-              className="bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 text-[#1D1D1F] dark:text-[#F5F5F7] px-6 py-3 rounded-full text-sm font-medium hover:bg-black/[0.04] dark:hover:bg-white/[0.08] transition-all"
+              className="bg-white dark:bg-[#2C2C2E] border border-[#D2D2D7] dark:border-white/10 text-[#1D1D1F] dark:text-[#F5F5F7] px-6 py-3 rounded-full text-sm font-medium hover:bg-black/4 dark:hover:bg-white/8 transition-all"
             >
               View CV
             </button>
@@ -134,7 +127,7 @@ export function BentoGridOverview({
         {/* 2. Stack Bento Card (Spans 4 cols on desktop) */}
         <div
           id="bento-stack-card"
-          className="md:col-span-4 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[28px] sm:rounded-[32px] p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300"
+          className="md:col-span-4 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[28px] sm:rounded-4xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300"
         >
           <div>
             <div className="flex justify-between items-start mb-5">
@@ -183,7 +176,7 @@ export function BentoGridOverview({
         {/* 3. Experience Bento Card (Spans 4 cols on desktop) */}
         <div
           id="bento-experience-card"
-          className="md:col-span-4 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[28px] sm:rounded-[32px] p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300"
+          className="md:col-span-4 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[28px] sm:rounded-4xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300"
         >
           <div>
             <div className="flex justify-between items-start mb-6">
@@ -197,7 +190,7 @@ export function BentoGridOverview({
               {experiences.map((exp, idx) => (
                 <div key={exp.id} className="relative pl-4 border-l-2 border-[#F2F2F7] dark:border-white/10">
                   <div
-                    className={`absolute -left-[5px] top-1 w-2 h-2 rounded-full ${
+                    className={`absolute -left-1.25 top-1 w-2 h-2 rounded-full ${
                       idx === 0 ? 'bg-[#007AFF] dark:bg-[#0A84FF]' : 'bg-[#D2D2D7] dark:bg-white/30'
                     }`}
                   />
@@ -206,7 +199,7 @@ export function BentoGridOverview({
                   </div>
                   <div className="text-xs text-[#86868B] font-medium flex items-center justify-between">
                     <span>{exp.role}</span>
-                    <span className="font-mono text-[10px]">{exp.period.split('–')[0].trim()}</span>
+                    <span className="font-mono text-[10px]">{exp.period.split('–')[0]?.trim() ?? exp.period}</span>
                   </div>
                 </div>
               ))}
@@ -228,7 +221,7 @@ export function BentoGridOverview({
         <div
           id="bento-featured-project-card"
           onClick={handleOpenFeatured}
-          className="md:col-span-5 bg-[#1C1C1E] text-white border border-[#D2D2D7]/20 dark:border-white/10 rounded-[28px] sm:rounded-[32px] p-6 sm:p-8 relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+          className="md:col-span-5 bg-[#1C1C1E] text-white border border-[#D2D2D7]/20 dark:border-white/10 rounded-[28px] sm:rounded-4xl p-6 sm:p-8 relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
         >
           {/* Angled Mockup Card Graphic on bottom right */}
           <div className="absolute -bottom-6 -right-6 w-48 sm:w-56 h-36 bg-[#2C2C2E] rounded-2xl transform rotate-3 border border-white/10 p-4 transition-transform group-hover:rotate-0 group-hover:scale-105 pointer-events-none shadow-xl">
@@ -251,10 +244,10 @@ export function BentoGridOverview({
               Case Study
             </div>
             <h2 className="text-2xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
-              {featuredProject.title}
+              {featuredProject?.title ?? 'Featured project'}
             </h2>
             <p className="text-xs sm:text-sm text-[#A1A1A6] leading-relaxed line-clamp-3">
-              {featuredProject.description}
+              {featuredProject?.description ?? 'Explore selected engineering work and case studies.'}
             </p>
           </div>
 
@@ -281,7 +274,7 @@ export function BentoGridOverview({
         {/* 5. Research & Publication Bento Card (Spans 3 cols on desktop) */}
         <div
           id="bento-research-card"
-          className="md:col-span-3 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[28px] sm:rounded-[32px] p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300"
+          className="md:col-span-3 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[28px] sm:rounded-4xl p-6 sm:p-8 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300"
         >
           <div>
             <div className="flex justify-between items-center mb-3">
@@ -325,7 +318,7 @@ export function BentoGridOverview({
         <div
           id="bento-videos-teaser-card"
           onClick={() => onSelectTab('videos')}
-          className="md:col-span-4 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[24px] p-5 sm:p-6 flex flex-col justify-between shadow-sm hover:border-blue-500/40 cursor-pointer group transition-all"
+          className="md:col-span-4 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-3xl p-5 sm:p-6 flex flex-col justify-between shadow-sm hover:border-blue-500/40 cursor-pointer group transition-all"
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -355,7 +348,7 @@ export function BentoGridOverview({
         </div>
 
         {/* Personality & Sports Bento Box */}
-        <div className="md:col-span-5 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[24px] p-5 sm:p-6 flex flex-col justify-between shadow-sm">
+        <div className="md:col-span-5 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-3xl p-5 sm:p-6 flex flex-col justify-between shadow-sm">
           <div className="space-y-1">
             <div className="text-[11px] font-mono uppercase tracking-wider text-[#86868B]">
               Off the keyboard
@@ -382,7 +375,7 @@ export function BentoGridOverview({
         </div>
 
         {/* Quick Contact & Action Bento Box */}
-        <div className="md:col-span-3 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[24px] p-5 sm:p-6 flex flex-col justify-between shadow-sm">
+        <div className="md:col-span-3 bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-3xl p-5 sm:p-6 flex flex-col justify-between shadow-sm">
           <div className="space-y-0.5">
             <div className="text-xs font-bold text-[#1D1D1F] dark:text-[#F5F5F7]">
               Have a project?

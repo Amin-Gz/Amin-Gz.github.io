@@ -52,7 +52,7 @@ export function VideosSection() {
       </div>
 
       {/* Main Coming Soon Featured Hero Banner */}
-      <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-b from-[#FFFFFF] to-[#F5F5F7] dark:from-[#1C1C1E] dark:to-[#121214] border border-[#D2D2D7] dark:border-white/10 p-8 sm:p-12 shadow-sm text-center">
+      <div className="relative overflow-hidden rounded-[28px] bg-linear-to-b from-[#FFFFFF] to-[#F5F5F7] dark:from-[#1C1C1E] dark:to-[#121214] border border-[#D2D2D7] dark:border-white/10 p-8 sm:p-12 shadow-sm text-center">
         {/* Subtle background glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-blue-500/10 blur-3xl rounded-full pointer-events-none" />
 
@@ -143,7 +143,7 @@ export function VideosSection() {
             <div
               key={project.id}
               id={`video-preview-${project.id}`}
-              className="bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-[24px] p-6 shadow-sm flex flex-col justify-between relative overflow-hidden group"
+              className="bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 rounded-3xl p-6 shadow-sm flex flex-col justify-between relative overflow-hidden group"
             >
               {/* Badge row */}
               <div>
@@ -173,7 +173,7 @@ export function VideosSection() {
                     {project.keyWorkflows.map((flow, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/[0.03] dark:bg-white/[0.04] text-[11px] text-[#1D1D1F] dark:text-[#F5F5F7]"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/3 dark:bg-white/4 text-[11px] text-[#1D1D1F] dark:text-[#F5F5F7]"
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-blue-500/70" />
                         {flow.title}
@@ -207,7 +207,7 @@ export function VideosSection() {
 
       {/* NDA Notice Banner */}
       <div className="p-5 rounded-2xl bg-amber-500/5 dark:bg-amber-500/10 border border-amber-500/20 flex items-start gap-3.5">
-        <Shield className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+        <Shield className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
         <div className="space-y-1 text-xs text-amber-900 dark:text-amber-200">
           <span className="font-semibold block">Need a private walkthrough for recruitment or due diligence?</span>
           <p className="text-amber-800/90 dark:text-amber-300/90 leading-relaxed">
