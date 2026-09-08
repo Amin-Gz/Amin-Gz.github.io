@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { TabId, ThemeMode } from '../types';
 import { personalInfo } from '../data/portfolioData';
+import profilePhoto from '../../assets/gz.jpeg';
+import { ProfileDialog } from './ProfileDialog';
 import {
   Sun,
   Moon,
@@ -25,6 +27,7 @@ export function Navigation({
   onOpenCommandPalette,
 }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMac, setIsMac] = useState(true);
 
@@ -69,25 +72,41 @@ export function Navigation({
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-        {/* Left: Brand Identity / Monogram */}
+        {/* Left: Profile and Brand Identity */}
         <div className="flex items-center gap-6">
-          <button
-            id="nav-brand-button"
-            onClick={() => {
-              onSelectTab('about');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="group flex items-center gap-2.5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg p-1"
-          >
-            <div className="w-7 h-7 rounded-lg bg-[#1D1D1F] dark:bg-[#FFFFFF] text-white dark:text-black flex items-center justify-center font-semibold text-xs tracking-tight transition-transform duration-200 group-hover:scale-105 shadow-xs">
-              AG
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold text-[#1D1D1F] dark:text-[#F5F5F7] tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                {personalInfo.name}
-              </span>
-            </div>
-          </button>
+          <div className="flex items-center gap-2.5">
+            <button
+              id="nav-profile-button"
+              type="button"
+              onClick={() => setProfileOpen(true)}
+              className="group rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-black"
+              aria-label={`Open ${personalInfo.name}'s contact card`}
+              aria-haspopup="dialog"
+              aria-expanded={profileOpen}
+            >
+              <img
+                src={profilePhoto}
+                alt=""
+                className="h-8 w-8 rounded-lg border border-black/10 object-cover shadow-xs transition-transform duration-200 group-hover:scale-105 dark:border-white/10"
+              />
+            </button>
+            <button
+              id="nav-brand-button"
+              type="button"
+              onClick={() => {
+                onSelectTab('about');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="group rounded-md text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+              aria-label="Go to About"
+            >
+              <div className="flex flex-col">
+                <span className="text-sm font-semibold text-[#1D1D1F] dark:text-[#F5F5F7] tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {personalInfo.name}
+                </span>
+              </div>
+            </button>
+          </div>
 
           {/* Desktop Navigation Tabs */}
           <nav className="hidden lg:flex items-center space-x-1">
@@ -207,6 +226,8 @@ export function Navigation({
           </div>
         </div>
       )}
+
+      <ProfileDialog isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
     </header>
   );
 }

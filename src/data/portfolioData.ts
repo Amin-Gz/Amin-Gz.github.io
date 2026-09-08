@@ -16,6 +16,7 @@ export const personalInfo = {
     'I build polished web experiences with React, Next.js, and TypeScript, while increasingly working across Python, Django, databases, and software architecture.',
   location: 'Tehran, Iran',
   status: 'Based in Tehran · Building web products · Always learning',
+  phone: '',
   email: 'amingoudarzy@yahoo.com',
   linkedin: 'https://linkedin.com/in/amingoodarzi',
   github: 'https://github.com/Amin-Gz',
