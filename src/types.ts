@@ -31,6 +31,12 @@ export interface ProjectItem {
   metricsOrScope?: string;
 }
 
+export interface NotablePerson {
+  name: string;
+  description: string;
+  linkedinUrl: string;
+}
+
 export interface VideoWorkflowChapter {
   timestamp: string;
   title: string;

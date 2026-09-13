@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { TabId } from '../types';
-import { personalInfo, projects, experiences } from '../data/portfolioData';
+import { personalInfo, notablePeople, experiences } from '../data/portfolioData';
 import {
   ArrowRight,
   ArrowUpRight,
   BookOpen,
   Check,
+  ChevronLeft,
+  ChevronRight,
+  Linkedin,
   Mail,
+  Users,
   Waves,
   Mountain,
   Dumbbell,
@@ -14,18 +18,14 @@ import {
 
 interface BentoGridOverviewProps {
   onSelectTab: (tab: TabId) => void;
-  onSelectProject?: (projectId: string) => void;
-  onOpenProjectModal?: (project: typeof projects[0]) => void;
 }
 
 export function BentoGridOverview({
   onSelectTab,
-  onSelectProject,
-  onOpenProjectModal,
 }: BentoGridOverviewProps) {
   const [copied, setCopied] = useState(false);
-
-  const featuredProject = projects.find((p) => p.id === 'avazeh-school') || projects[0];
+  const [activePersonIndex, setActivePersonIndex] = useState(0);
+  const activePerson = notablePeople[activePersonIndex];
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personalInfo.email);
@@ -33,14 +33,14 @@ export function BentoGridOverview({
     setTimeout(() => setCopied(false), 1500);
   };
 
-  const handleOpenFeatured = () => {
-    if (onOpenProjectModal && featuredProject) {
-      onOpenProjectModal(featuredProject);
-    } else if (onSelectProject && featuredProject) {
-      onSelectProject(featuredProject.id);
-    } else {
-      onSelectTab('projects');
-    }
+  const showPreviousPerson = () => {
+    setActivePersonIndex((current) =>
+      current === 0 ? notablePeople.length - 1 : current - 1,
+    );
+  };
+
+  const showNextPerson = () => {
+    setActivePersonIndex((current) => (current + 1) % notablePeople.length);
   };
 
   return (
@@ -217,57 +217,105 @@ export function BentoGridOverview({
           </button>
         </div>
 
-        {/* 4. Featured Project Bento Card (Spans 5 cols on desktop, High-Contrast Dark Bento Card) */}
+        {/* 4. Notable Collaborators Slider (Spans 5 cols on desktop) */}
         <div
-          id="bento-featured-project-card"
-          onClick={handleOpenFeatured}
-          className="md:col-span-5 bg-[#1C1C1E] text-white border border-[#D2D2D7]/20 dark:border-white/10 rounded-[28px] sm:rounded-4xl p-6 sm:p-8 relative overflow-hidden group cursor-pointer shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+          id="bento-people-slider"
+          className="md:col-span-5 min-h-72 bg-[#1C1C1E] text-white border border-[#D2D2D7]/20 dark:border-white/10 rounded-[28px] sm:rounded-4xl p-6 sm:p-8 relative overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="People I've worked with"
         >
-          {/* Angled Mockup Card Graphic on bottom right */}
-          <div className="absolute -bottom-6 -right-6 w-48 sm:w-56 h-36 bg-[#2C2C2E] rounded-2xl transform rotate-3 border border-white/10 p-4 transition-transform group-hover:rotate-0 group-hover:scale-105 pointer-events-none shadow-xl">
-            <div className="flex items-center gap-1 mb-3">
-              <div className="w-2 h-2 rounded-full bg-red-400/70" />
-              <div className="w-2 h-2 rounded-full bg-amber-400/70" />
-              <div className="w-2 h-2 rounded-full bg-green-400/70" />
-            </div>
-            <div className="w-full h-2.5 bg-white/20 rounded-full mb-2" />
-            <div className="w-2/3 h-2 bg-white/10 rounded-full mb-3" />
-            <div className="grid grid-cols-3 gap-1.5">
-              <div className="h-6 bg-white/5 rounded" />
-              <div className="h-6 bg-white/5 rounded" />
-              <div className="h-6 bg-white/5 rounded" />
-            </div>
-          </div>
+          <div className="absolute -right-12 -top-14 h-48 w-48 rounded-full bg-blue-500/12 blur-3xl pointer-events-none" />
 
-          <div className="space-y-2 z-10 max-w-sm">
-            <div className="text-[11px] font-mono text-[#0A84FF] uppercase tracking-wider font-semibold">
-              Case Study
+          <div className="relative z-10 flex items-start justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 text-[11px] font-mono text-[#0A84FF] uppercase tracking-wider font-semibold">
+                <Users className="h-3.5 w-3.5" />
+                <span>People I’ve Worked With</span>
+              </div>
+              <p className="mt-1.5 max-w-xs text-[11px] leading-relaxed text-[#86868B]">
+                Professionals and engineering leaders who have influenced my journey.
+              </p>
             </div>
-            <h2 className="text-2xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors">
-              {featuredProject?.title ?? 'Featured project'}
-            </h2>
-            <p className="text-xs sm:text-sm text-[#A1A1A6] leading-relaxed line-clamp-3">
-              {featuredProject?.description ?? 'Explore selected engineering work and case studies.'}
-            </p>
-          </div>
-
-          <div className="mt-8 z-10 flex items-center justify-between">
-            <div className="flex space-x-2">
-              <span className="px-2.5 py-1 bg-white/10 rounded-lg text-[10px] font-mono text-white/90 border border-white/10">
-                Next.js
-              </span>
-              <span className="px-2.5 py-1 bg-white/10 rounded-lg text-[10px] font-mono text-white/90 border border-white/10">
-                Konva.js
-              </span>
-              <span className="px-2.5 py-1 bg-white/10 rounded-lg text-[10px] font-mono text-white/90 border border-white/10">
-                TypeScript
-              </span>
-            </div>
-
-            <span className="text-xs text-white/80 font-medium group-hover:text-white inline-flex items-center gap-1">
-              <span>View details</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+            <span className="shrink-0 text-[11px] font-mono text-white/45" aria-live="polite">
+              {String(activePersonIndex + 1).padStart(2, '0')} / {String(notablePeople.length).padStart(2, '0')}
             </span>
+          </div>
+
+          {activePerson && (
+            <div
+              key={activePerson.name}
+              className="collaborator-slide relative z-10 my-5 flex items-start gap-4"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${activePersonIndex + 1} of ${notablePeople.length}`}
+            >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/8 text-sm font-semibold text-blue-300 shadow-inner">
+                {activePerson.name
+                  .split(' ')
+                  .map((part) => part[0])
+                  .join('')}
+              </div>
+              <div className="min-w-0 space-y-2">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                  {activePerson.name}
+                </h2>
+                <p className="text-xs sm:text-sm text-[#A1A1A6] leading-relaxed">
+                  {activePerson.description}
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="relative z-10 flex items-center justify-between gap-4 border-t border-white/10 pt-4">
+            <div className="flex items-center gap-1.5" aria-label="Choose a person">
+              {notablePeople.map((person, index) => (
+                <button
+                  key={person.name}
+                  type="button"
+                  onClick={() => setActivePersonIndex(index)}
+                  className={`h-1.5 rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1C1C1E] ${
+                    index === activePersonIndex
+                      ? 'w-6 bg-[#0A84FF]'
+                      : 'w-1.5 bg-white/25 hover:bg-white/50'
+                  }`}
+                  aria-label={`Show ${person.name}`}
+                  aria-current={index === activePersonIndex ? 'true' : undefined}
+                />
+              ))}
+            </div>
+
+            <div className="flex items-center gap-2">
+              {activePerson && (
+                <a
+                  href={activePerson.linkedinUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mr-1 inline-flex items-center gap-1.5 text-xs font-medium text-blue-300 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
+                  aria-label={`View ${activePerson.name}'s LinkedIn profile`}
+                >
+                  <Linkedin className="h-3.5 w-3.5" />
+                  <span>Profile</span>
+                  <ArrowUpRight className="h-3 w-3" />
+                </a>
+              )}
+              <button
+                type="button"
+                onClick={showPreviousPerson}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/70 transition-colors hover:bg-white/12 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                aria-label="Show previous person"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={showNextPerson}
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/70 transition-colors hover:bg-white/12 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                aria-label="Show next person"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </div>
 

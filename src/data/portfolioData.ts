@@ -5,6 +5,7 @@ import {
   TechItem,
   EducationItem,
   LanguageItem,
+  NotablePerson,
 } from '../types';
 
 export const personalInfo = {
@@ -75,6 +76,39 @@ export const experiences: ExperienceItem[] = [
       'Gained hands-on full-stack exposure with Node.js, Express.js, and MSSQL database queries.',
     ],
     technologies: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MSSQL', 'JavaScript'],
+  },
+];
+
+export const notablePeople: NotablePerson[] = [
+  {
+    name: 'Kasra Azizi',
+    description:
+      'Robotics and control researcher specializing in nonlinear control, state estimation, and autonomous mobile robot navigation.',
+    linkedinUrl: 'https://www.linkedin.com/in/kasra-azizi-b43430152/',
+  },
+  {
+    name: 'Peyman Jowkar',
+    description:
+      'Technical Manager at Tonb Software Development Company, contributing to the development and delivery of industrial software and autonomous robotics solutions.',
+    linkedinUrl: 'https://www.linkedin.com/in/peymanjowkar/',
+  },
+  {
+    name: 'Ali Mosajji',
+    description:
+      'Software professional experienced in application development, project lifecycles, technical leadership, and mentoring development teams.',
+    linkedinUrl: 'https://www.linkedin.com/in/mosaji/',
+  },
+  {
+    name: 'Mojtaba Moshfeghifar',
+    description:
+      'Software and mobile application developer with extensive experience in React Native, cross-platform development, performance optimization, and building production-grade applications.',
+    linkedinUrl: 'https://www.linkedin.com/in/mojtaba-moshfeghifar-37927b16a/',
+  },
+  {
+    name: 'Narek Shabandari',
+    description:
+      'Full-stack developer and engineering team leader specializing in React, Next.js, TypeScript, Node.js, scalable web applications, and modern software delivery practices.',
+    linkedinUrl: 'https://www.linkedin.com/in/narek-shabandari/',
   },
 ];
 

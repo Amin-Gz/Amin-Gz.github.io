@@ -104,11 +104,7 @@ export default function App() {
         {activeTab === 'about' && (
           <div className="animate-in fade-in duration-200 space-y-10 pt-4">
             {/* Bento Grid Showcase */}
-            <BentoGridOverview
-              onSelectTab={handleSelectTab}
-              onSelectProject={handleSelectProject}
-              onOpenProjectModal={(p) => setSelectedProject(p)}
-            />
+            <BentoGridOverview onSelectTab={handleSelectTab} />
 
             {/* In-depth Engineering Philosophy & Profile */}
             <div className="pt-4 border-t border-[#D2D2D7] dark:border-white/10">
