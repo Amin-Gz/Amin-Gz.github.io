@@ -220,7 +220,7 @@ export function BentoGridOverview({
         {/* 4. Notable Collaborators Slider (Spans 5 cols on desktop) */}
         <div
           id="bento-people-slider"
-          className="md:col-span-5 min-h-72 bg-[#1C1C1E] text-white border border-[#D2D2D7]/20 dark:border-white/10 rounded-[28px] sm:rounded-4xl p-6 sm:p-8 relative overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between"
+          className="md:col-span-5 min-h-72 bg-white dark:bg-[#1C1C1E] text-[#1D1D1F] dark:text-[#F5F5F7] border border-[#D2D2D7] dark:border-white/10 rounded-[28px] sm:rounded-4xl p-6 sm:p-8 relative overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between"
           role="region"
           aria-roledescription="carousel"
           aria-label="People I've worked with"
@@ -229,15 +229,15 @@ export function BentoGridOverview({
 
           <div className="relative z-10 flex items-start justify-between gap-4">
             <div>
-              <div className="flex items-center gap-2 text-[11px] font-mono text-[#0A84FF] uppercase tracking-wider font-semibold">
+              <div className="flex items-center gap-2 text-[11px] font-mono text-[#007AFF] dark:text-[#0A84FF] uppercase tracking-wider font-semibold">
                 <Users className="h-3.5 w-3.5" />
                 <span>People I’ve Worked With</span>
               </div>
-              <p className="mt-1.5 max-w-xs text-[11px] leading-relaxed text-[#86868B]">
+              <p className="mt-1.5 max-w-xs text-[11px] leading-relaxed text-[#6E6E73] dark:text-[#A1A1A6]">
                 Professionals and engineering leaders who have influenced my journey.
               </p>
             </div>
-            <span className="shrink-0 text-[11px] font-mono text-white/45" aria-live="polite">
+            <span className="shrink-0 text-[11px] font-mono text-[#6E6E73] dark:text-[#A1A1A6]" aria-live="polite">
               {String(activePersonIndex + 1).padStart(2, '0')} / {String(notablePeople.length).padStart(2, '0')}
             </span>
           </div>
@@ -250,34 +250,34 @@ export function BentoGridOverview({
               aria-roledescription="slide"
               aria-label={`${activePersonIndex + 1} of ${notablePeople.length}`}
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/8 text-sm font-semibold text-blue-300 shadow-inner">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#D2D2D7] dark:border-white/10 bg-[#F5F5F7] dark:bg-white/8 text-sm font-semibold text-blue-600 dark:text-blue-300 shadow-inner">
                 {activePerson.name
                   .split(' ')
                   .map((part) => part[0])
                   .join('')}
               </div>
               <div className="min-w-0 space-y-2">
-                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+                <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1D1D1F] dark:text-[#F5F5F7]">
                   {activePerson.name}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#A1A1A6] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#6E6E73] dark:text-[#A1A1A6] leading-relaxed">
                   {activePerson.description}
                 </p>
               </div>
             </div>
           )}
 
-          <div className="relative z-10 flex items-center justify-between gap-4 border-t border-white/10 pt-4">
+          <div className="relative z-10 flex items-center justify-between gap-4 border-t border-[#D2D2D7] dark:border-white/10 pt-4">
             <div className="flex items-center gap-1.5" aria-label="Choose a person">
               {notablePeople.map((person, index) => (
                 <button
                   key={person.name}
                   type="button"
                   onClick={() => setActivePersonIndex(index)}
-                  className={`h-1.5 rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1C1C1E] ${
+                  className={`h-1.5 rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#1C1C1E] ${
                     index === activePersonIndex
-                      ? 'w-6 bg-[#0A84FF]'
-                      : 'w-1.5 bg-white/25 hover:bg-white/50'
+                      ? 'w-6 bg-[#007AFF] dark:bg-[#0A84FF]'
+                      : 'w-1.5 bg-[#86868B]/50 hover:bg-[#86868B] dark:bg-white/25 dark:hover:bg-white/50'
                   }`}
                   aria-label={`Show ${person.name}`}
                   aria-current={index === activePersonIndex ? 'true' : undefined}
@@ -291,7 +291,7 @@ export function BentoGridOverview({
                   href={activePerson.linkedinUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="mr-1 inline-flex items-center gap-1.5 text-xs font-medium text-blue-300 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
+                  className="mr-1 inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 dark:text-blue-300 transition-colors hover:text-blue-800 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400 rounded"
                   aria-label={`View ${activePerson.name}'s LinkedIn profile`}
                 >
                   <Linkedin className="h-3.5 w-3.5" />
@@ -302,7 +302,7 @@ export function BentoGridOverview({
               <button
                 type="button"
                 onClick={showPreviousPerson}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/70 transition-colors hover:bg-white/12 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-[#D2D2D7] dark:border-white/10 bg-[#F5F5F7] dark:bg-white/6 text-[#6E6E73] dark:text-white/70 transition-colors hover:bg-[#E8E8ED] dark:hover:bg-white/12 hover:text-[#1D1D1F] dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400"
                 aria-label="Show previous person"
               >
                 <ChevronLeft className="h-4 w-4" />
@@ -310,7 +310,7 @@ export function BentoGridOverview({
               <button
                 type="button"
                 onClick={showNextPerson}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/6 text-white/70 transition-colors hover:bg-white/12 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-[#D2D2D7] dark:border-white/10 bg-[#F5F5F7] dark:bg-white/6 text-[#6E6E73] dark:text-white/70 transition-colors hover:bg-[#E8E8ED] dark:hover:bg-white/12 hover:text-[#1D1D1F] dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400"
                 aria-label="Show next person"
               >
                 <ChevronRight className="h-4 w-4" />
