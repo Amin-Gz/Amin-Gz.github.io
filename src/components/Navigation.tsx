@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { TabId, ThemeMode } from '../types';
 import { personalInfo } from '../data/portfolioData';
 import profilePhoto from '../../assets/gz.jpeg';
@@ -29,6 +30,9 @@ export function Navigation({
   const [profileOpen, setProfileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMac, setIsMac] = useState(true);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+  const sidebarRef = useRef<HTMLElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setIsMac(/(Mac|iPhone|iPod|iPad)/i.test(navigator.platform || navigator.userAgent));
@@ -39,6 +43,47 @@ export function Navigation({
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false);
+      } else if (event.key === 'Tab') {
+        const buttons = sidebarRef.current?.querySelectorAll<HTMLButtonElement>('button:not([disabled])');
+        if (!buttons?.length) return;
+        const first = buttons[0];
+        const last = buttons[buttons.length - 1];
+        if (!first || !last) return;
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    const desktopQuery = window.matchMedia('(min-width: 1024px)');
+    const closeOnDesktop = () => {
+      if (desktopQuery.matches) setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    desktopQuery.addEventListener('change', closeOnDesktop);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+      desktopQuery.removeEventListener('change', closeOnDesktop);
+      if (!desktopQuery.matches) menuToggleRef.current?.focus();
+    };
+  }, [mobileMenuOpen]);
 
   const navItems: { id: TabId; label: string; badge?: string }[] = [
     { id: 'about', label: 'About' },
@@ -166,57 +211,95 @@ export function Navigation({
           {/* Mobile Menu Toggle */}
           <button
             id="nav-mobile-toggle"
+            ref={menuToggleRef}
+            type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden w-8 h-8 rounded-md flex items-center justify-center text-[#1D1D1F] dark:text-[#F5F5F7] bg-black/4 dark:bg-white/6"
-            aria-label="Toggle navigation menu"
+            aria-label="Open navigation menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation-sidebar"
           >
-            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            <Menu className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-[#D2D2D7] dark:border-white/10 bg-[#F5F5F7] dark:bg-[#121214] px-4 py-3 space-y-1 transition-all">
-          {navItems.map((item) => {
-            const isActive = activeTab === item.id;
-            return (
+      {mobileMenuOpen && createPortal(
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div
+            className="absolute inset-0 bg-black/40 dark:bg-black/70"
+            onMouseDown={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <aside
+            id="mobile-navigation-sidebar"
+            ref={sidebarRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
+            className="mobile-sidebar absolute inset-y-0 right-0 flex h-dvh w-80 max-w-[85vw] flex-col border-l border-[#D2D2D7] bg-white shadow-2xl dark:border-white/10 dark:bg-[#1C1C1E]"
+          >
+            <div className="flex items-center justify-between border-b border-[#D2D2D7] px-5 py-5 dark:border-white/10">
+              <span className="text-sm font-semibold text-[#1D1D1F] dark:text-[#F5F5F7]">Navigation</span>
               <button
-                key={item.id}
-                id={`mobile-nav-${item.id}`}
-                onClick={() => {
-                  onSelectTab(item.id);
-                  setMobileMenuOpen(false);
-                }}
-                className={`w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive
-                    ? 'text-blue-600 dark:text-blue-400 bg-blue-500/10 font-semibold'
-                    : 'text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7]'
-                }`}
+                ref={closeButtonRef}
+                type="button"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-[#6E6E73] hover:bg-black/5 hover:text-[#1D1D1F] focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-[#A1A1A6] dark:hover:bg-white/8 dark:hover:text-white"
+                aria-label="Close navigation menu"
               >
-                {item.label}
+                <X className="h-4 w-4" />
               </button>
-            );
-          })}
-          <div className="pt-2 border-t border-[#D2D2D7]/50 dark:border-white/10 flex items-center justify-between px-2">
-            <span className="text-xs text-[#86868B]">Theme</span>
-            <div className="flex gap-1">
-              {(['light', 'dark'] as ThemeMode[]).map((m) => (
-                <button
-                  key={m}
-                  onClick={() => onSetTheme(m)}
-                  className={`px-2.5 py-1 text-xs rounded capitalize ${
-                    theme === m
-                      ? 'bg-blue-600 text-white font-medium'
-                      : 'text-[#6E6E73] dark:text-[#A1A1A6] bg-black/4 dark:bg-white/6'
-                  }`}
-                >
-                  {m}
-                </button>
-              ))}
             </div>
-          </div>
-        </div>
+
+            <nav className="min-h-0 flex-1 space-y-1 overflow-y-auto px-4 py-5" aria-label="Mobile navigation">
+              {navItems.map((item) => {
+                const isActive = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    id={`mobile-nav-${item.id}`}
+                    type="button"
+                    onClick={() => {
+                      onSelectTab(item.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`w-full rounded-xl px-4 py-3 text-left text-sm font-medium transition-colors ${
+                      isActive
+                        ? 'bg-blue-500/10 font-semibold text-blue-600 dark:text-blue-400'
+                        : 'text-[#6E6E73] hover:bg-black/4 hover:text-[#1D1D1F] dark:text-[#A1A1A6] dark:hover:bg-white/6 dark:hover:text-[#F5F5F7]'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                );
+              })}
+            </nav>
+
+            <div className="flex items-center justify-between border-t border-[#D2D2D7] px-5 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] dark:border-white/10">
+              <span className="text-xs font-medium text-[#6E6E73] dark:text-[#A1A1A6]">Theme</span>
+              <div className="flex gap-1">
+                {(['light', 'dark'] as ThemeMode[]).map((mode) => (
+                  <button
+                    key={mode}
+                    type="button"
+                    onClick={() => onSetTheme(mode)}
+                    aria-pressed={theme === mode}
+                    className={`rounded-lg px-3 py-1.5 text-xs capitalize ${
+                      theme === mode
+                        ? 'bg-blue-600 font-medium text-white'
+                        : 'bg-black/4 text-[#6E6E73] dark:bg-white/6 dark:text-[#A1A1A6]'
+                    }`}
+                  >
+                    {mode}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </aside>
+        </div>,
+        document.body,
       )}
 
       <ProfileDialog isOpen={profileOpen} onClose={() => setProfileOpen(false)} />
