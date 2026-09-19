@@ -16,7 +16,6 @@ import {
   Github,
   Sun,
   Moon,
-  Laptop,
   Check,
   Copy,
 } from 'lucide-react';
@@ -247,17 +246,6 @@ export function CommandPalette({
       icon: <Moon className="w-4 h-4 text-blue-400" />,
       action: () => {
         onSetTheme('dark');
-        onClose();
-      },
-    },
-    {
-      id: 'theme-system',
-      title: 'Set Theme: System Preference',
-      subtitle: 'Synchronize automatically with operating system',
-      category: 'Appearance',
-      icon: <Laptop className="w-4 h-4 text-neutral-500" />,
-      action: () => {
-        onSetTheme('system');
         onClose();
       },
     },

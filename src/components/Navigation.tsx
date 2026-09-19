@@ -6,7 +6,6 @@ import { ProfileDialog } from './ProfileDialog';
 import {
   Sun,
   Moon,
-  Laptop,
   Menu,
   X,
 } from 'lucide-react';
@@ -51,17 +50,7 @@ export function Navigation({
     { id: 'cv', label: 'CV' },
   ];
 
-  const cycleTheme = () => {
-    if (theme === 'light') onSetTheme('dark');
-    else if (theme === 'dark') onSetTheme('system');
-    else onSetTheme('light');
-  };
-
-  const getThemeIcon = () => {
-    if (theme === 'light') return <Sun className="w-3.5 h-3.5 text-amber-500" />;
-    if (theme === 'dark') return <Moon className="w-3.5 h-3.5 text-blue-400" />;
-    return <Laptop className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" />;
-  };
+  const toggleTheme = () => onSetTheme(theme === 'light' ? 'dark' : 'light');
 
   return (
     <header
@@ -151,11 +140,14 @@ export function Navigation({
           {/* Theme Mode Toggle */}
           <button
             id="nav-theme-toggle"
-            onClick={cycleTheme}
+            onClick={toggleTheme}
             className="w-8 h-8 rounded-lg flex items-center justify-center text-[#6E6E73] dark:text-[#A1A1A6] hover:text-[#1D1D1F] dark:hover:text-[#F5F5F7] bg-white dark:bg-[#1C1C1E] border border-[#D2D2D7] dark:border-white/10 shadow-xs transition-all cursor-pointer"
-            title={`Current theme: ${theme} (Click to switch)`}
+            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
           >
-            {getThemeIcon()}
+            {theme === 'light'
+              ? <Sun className="w-3.5 h-3.5 text-amber-500" />
+              : <Moon className="w-3.5 h-3.5 text-blue-400" />}
           </button>
 
           {/* Direct Contact Action */}
@@ -209,7 +201,7 @@ export function Navigation({
           <div className="pt-2 border-t border-[#D2D2D7]/50 dark:border-white/10 flex items-center justify-between px-2">
             <span className="text-xs text-[#86868B]">Theme</span>
             <div className="flex gap-1">
-              {(['light', 'dark', 'system'] as ThemeMode[]).map((m) => (
+              {(['light', 'dark'] as ThemeMode[]).map((m) => (
                 <button
                   key={m}
                   onClick={() => onSetTheme(m)}

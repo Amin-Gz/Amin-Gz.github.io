@@ -20,44 +20,17 @@ export default function App() {
   const [theme, setTheme] = useState<ThemeMode>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('amin-portfolio-theme') as ThemeMode;
-      if (saved && ['light', 'dark', 'system'].includes(saved)) return saved;
+      if (saved === 'light' || saved === 'dark') return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    return 'system';
+    return 'light';
   });
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
-  // Apply Theme Mode (Light / Dark / System)
   useEffect(() => {
-    const root = document.documentElement;
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-    const applyTheme = () => {
-      let isDark = false;
-      if (theme === 'dark') {
-        isDark = true;
-      } else if (theme === 'light') {
-        isDark = false;
-      } else {
-        isDark = mediaQuery.matches;
-      }
-
-      if (isDark) {
-        root.classList.add('dark');
-      } else {
-        root.classList.remove('dark');
-      }
-    };
-
-    applyTheme();
+    document.documentElement.classList.toggle('dark', theme === 'dark');
     localStorage.setItem('amin-portfolio-theme', theme);
-
-    const handler = () => {
-      if (theme === 'system') applyTheme();
-    };
-
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
   }, [theme]);
 
   // Global Keyboard Shortcut (Cmd+K / Ctrl+K)
