@@ -383,6 +383,13 @@ export const techStack: TechItem[] = [
   { name: 'Microsoft SQL Server', category: 'Data', description: 'Enterprise relational data management and T-SQL' },
   { name: 'Supabase', category: 'Data', description: 'Modern cloud database, authentication, real-time subscriptions' },
 
+  // AI & Applied Research
+  { name: 'Genetic Algorithms', category: 'AI', description: 'Fitness functions and mutation strategies for production scheduling research' },
+  { name: 'Neural Networks', category: 'AI', description: 'Compared with other models in published traffic forecasting research' },
+  { name: 'Time-Series Forecasting', category: 'AI', description: 'Short- and medium-term urban traffic flow prediction research' },
+  { name: 'Model Evaluation', category: 'AI', description: 'Prediction error comparisons using RMSE and MAPE' },
+  { name: 'Fuzzy Network Analysis', category: 'AI', description: 'FANP and fuzzy criteria weighting for e-learning research' },
+
   // Tools
   { name: 'Git', category: 'Tools', description: 'Version control, branching strategies, collaborative workflows' },
   { name: 'GitHub', category: 'Tools', description: 'Code hosting, pull requests, CI/CD actions' },

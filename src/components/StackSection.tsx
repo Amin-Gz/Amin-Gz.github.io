@@ -6,6 +6,7 @@ import {
   Smartphone,
   Server,
   Database,
+  BrainCircuit,
   Wrench,
   Search,
 } from 'lucide-react';
@@ -44,6 +45,12 @@ export function StackSection() {
       description: 'Relational data modeling, schema optimizations, and real-time data sync.',
     },
     {
+      id: 'AI',
+      label: 'AI & Applied Research',
+      icon: <BrainCircuit className="w-4 h-4 text-violet-500" />,
+      description: 'Research in forecasting, optimization, and fuzzy decision analysis.',
+    },
+    {
       id: 'Tools',
       label: 'Tools & DevOps',
       icon: <Wrench className="w-4 h-4 text-rose-500" />,
@@ -65,7 +72,7 @@ export function StackSection() {
           Stack
         </h2>
         <p className="text-base text-[#6E6E73] dark:text-[#A1A1A6]">
-          Technologies I use to turn ideas into working products.
+          Technologies I use to build products and AI methods explored in my research.
         </p>
 
         {/* Quick Search */}

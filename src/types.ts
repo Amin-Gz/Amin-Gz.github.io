@@ -82,7 +82,7 @@ export interface PublicationItem {
 
 export interface TechItem {
   name: string;
-  category: 'Frontend' | 'Mobile' | 'Backend' | 'Data' | 'Tools';
+  category: 'Frontend' | 'Mobile' | 'Backend' | 'Data' | 'AI' | 'Tools';
   description?: string;
   brandColor?: string;
   experienceLevel?: string;
